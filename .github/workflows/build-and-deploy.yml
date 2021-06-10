@@ -22,7 +22,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: unnecessary
     - name: Deploy with rsync
-      run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/
+      run: rsync -avz ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/
     - name: build and start
       uses: garygrossgarten/github-action-ssh@release
       with:
