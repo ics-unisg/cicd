@@ -28,6 +28,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.app.rule=Host(`cicd.eigenmannmartin.ch`)"
+      - "traefik.http.routers.app.service=app"
       - "traefik.http.services.app.loadbalancer.server.port=8080"
       - "traefik.http.routers.app.tls=true"
       - "traefik.http.routers.app.entryPoints=web,websecure"
