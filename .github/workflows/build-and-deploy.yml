@@ -63,6 +63,7 @@ jobs:
         script: |
           cd /home/${{ secrets.SSH_USER }}/
           touch acme.json
+          sudo chmod 0600 acme.json
           sudo docker-compose up -d
     
     
