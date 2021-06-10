@@ -40,7 +40,7 @@ jobs:
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}  
       with:
         source: "app/*"
-        target: "/deploy"
+        target: "/home/${{ secrets.SSH_USER }}/"
         strip_components: 1
         rm: false
         overwrite: true
@@ -53,7 +53,7 @@ jobs:
         PORT: 22
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /deploy
+          cd /home/${{ secrets.SSH_USER }}/
           docker-compose up -d --no-deps --build
     
     
