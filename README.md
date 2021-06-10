@@ -17,4 +17,4 @@ SSH_PRIVATE_KEY is the private key for the user that has admin rights on that vm
 ![image](https://user-images.githubusercontent.com/2293142/121609248-c324d780-ca53-11eb-9929-1a14d34ccba9.png)
 
 5. Push new code to the main branch
-6. Open in your browser https://app.<server-ip>.nip.io
+6. Open in your browser `https://app.<server-ip>.nip.io`
