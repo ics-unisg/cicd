@@ -30,7 +30,7 @@ jobs:
     - name: Download csp artifacts
       uses: actions/download-artifact@v1
       with:
-        name: csp
+        name: app
     - name: Copy host via scp
       uses: appleboy/scp-action@master
       env:
