@@ -40,7 +40,7 @@ jobs:
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}  
       with:
         source: "app/*"
-        target: "/tmp"
+        target: "/deploy"
         strip_components: 1
         rm: false
         overwrite: true
@@ -49,11 +49,11 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
-        USERNAME: deploy
+        USERNAME: ${{ secrets.SSH_USER }}
         PORT: 22
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /tmp
+          cd /deploy
           docker-compose up -d --no-deps --build
     
     
