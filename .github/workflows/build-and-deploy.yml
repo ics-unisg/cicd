@@ -39,7 +39,7 @@ jobs:
         PORT: 22
         KEY: ${{ secrets.SSH_PRIVATE_KEY }}  
       with:
-        source: "/*"
+        source: "app/*"
         target: "/tmp"
         strip_components: 1
         rm: false
