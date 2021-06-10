@@ -16,19 +16,45 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        known_hosts: unnecessary
-    - name: Deploy with rsync
-      run: rsync -avz ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/
-    - name: build and start
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: docker-compose up -d --no-deps --build
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v1
+      with: 
+        name: app
+        path: ./
+    
+    
+    deploy-staging:
+      runs-on: ubuntu-latest
+      needs: [build, ]
+      steps:
+      - name: Download csp artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: csp
+      - name: Copy host via scp
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USER }}
+          PORT: 22
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}  
+        with:
+          source: "/*"
+          target: "/tmp"
+          strip_components: 1
+          rm: false
+          overwrite: true
+          
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          USERNAME: deploy
+          PORT: 22
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /tmp
+            docker-compose up -d --no-deps --build
+    
     
         
