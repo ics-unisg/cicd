@@ -1,7 +1,19 @@
 # CI/CD
 
+1. Fork this Repository
+2. Start a new ubuntu vm.
+3. Install docker and zsh
 ```bash
-docker-compose up -d --no-deps --build hello-world
+https://gist.githubusercontent.com/eigenmannmartin/db64d85f9bc5b03b071b4afc281aa238/raw/
 ```
+4. Define SSH_HOST, SSH_PRIVATE_KEY and SSH_USER.
 
-Tests are run. Only if they all pass, the new version is started.
+SSH_USER is the username
+
+SSH_HOST is the ip address of the vm
+
+SSH_PRIVATE_KEY is the private key for the user that has admin rights on that vm
+
+![image](https://user-images.githubusercontent.com/2293142/121609248-c324d780-ca53-11eb-9929-1a14d34ccba9.png)
+
+5. Push new code to the main branch
