@@ -1,0 +1,11 @@
+version: "3.0"
+
+services:
+  app:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    command: "java -jar /data/app-0.1.0.jar"
+    restart: unless-stopped
+    ports:
+      - 8080:8080
