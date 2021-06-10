@@ -27,7 +27,8 @@ services:
       - ./:/data/
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.adminer.rule=Host(`cicd.eigenmannmartin.ch`)"
-      - "traefik.http.routers.adminer.tls=true"
-      - "traefik.http.routers.adminer.entryPoints=web,websecure"
-      - "traefik.http.routers.adminer.tls.certresolver=le"
+      - "traefik.http.routers.app.rule=Host(`cicd.eigenmannmartin.ch`)"
+      - "traefik.http.services.app.loadbalancer.server.port=8080"
+      - "traefik.http.routers.app.tls=true"
+      - "traefik.http.routers.app.entryPoints=web,websecure"
+      - "traefik.http.routers.app.tls.certresolver=le"
