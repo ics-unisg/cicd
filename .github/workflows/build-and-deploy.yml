@@ -64,6 +64,7 @@ jobs:
           cd /home/${{ secrets.SSH_USER }}/
           touch acme.json
           sudo chmod 0600 acme.json
+          sudo echo "PUB_IP=$(wget -qO- http://ipecho.net/plain | xargs echo)" > .env
           sudo docker-compose up -d
     
     

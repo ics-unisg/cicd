@@ -19,10 +19,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./acme.json:/acme.json
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.redirs.rule=hostregexp(`{host:.+}`)"  
-      - "traefik.http.routers.redirs.entrypoints=web"  
-      - "traefik.http.routers.redirs.middlewares=redirect-to-https" 
+  
 
   app:
     image: openjdk
@@ -32,7 +34,7 @@ services:
       - ./:/data/
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`deployment-1.unisg.host`)"
+      - "traefik.http.routers.app.rule=Host(`app.${PUB_IP}.nip.io`)"
       - "traefik.http.routers.app.service=app"
       - "traefik.http.services.app.loadbalancer.server.port=8080"
       - "traefik.http.routers.app.tls=true"
