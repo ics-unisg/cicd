@@ -4,7 +4,7 @@
 2. Start a new ubuntu vm.
 3. Install docker and zsh
 ```bash
-https://gist.githubusercontent.com/eigenmannmartin/db64d85f9bc5b03b071b4afc281aa238/raw/
+curl https://gist.githubusercontent.com/eigenmannmartin/db64d85f9bc5b03b071b4afc281aa238/raw/ | sh
 ```
 4. Define SSH_HOST, SSH_PRIVATE_KEY and SSH_USER.
 
