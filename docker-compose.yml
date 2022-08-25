@@ -8,7 +8,7 @@ services:
       - --entrypoints.websecure.address=:443
       - --providers.docker=true
       - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
-      - --certificatesresolvers.le.acme.email=martin.eigenmann@unisg.ch
+      - --certificatesresolvers.le.acme.email=scs-it@unisg.ch
       - --certificatesresolvers.le.acme.storage=/acme.json
       - --providers.docker.exposedByDefault=false
       - --serversTransport.insecureSkipVerify=true
@@ -17,7 +17,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./acme.json:/acme.json
+      - ${PWD}/acme.json:/acme.json
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -35,7 +35,7 @@ services:
       - ./:/data/
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`app.${PUB_IP}.nip.io`)"
+      - "traefik.http.routers.app.rule=Host(`app.${PUB_IP}.asse.scs.unisg.ch`)"
       - "traefik.http.routers.app.service=app"
       - "traefik.http.services.app.loadbalancer.server.port=8080"
       - "traefik.http.routers.app.tls=true"
